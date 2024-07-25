@@ -1,4 +1,6 @@
-﻿namespace StateMachine.Runner
+﻿using StateMachine.TraficLight;
+
+namespace StateMachine.Runner
 {
     internal class Program
     {
@@ -6,7 +8,8 @@
         {
             var valueFromDatabase = TrafficLightState.Red;
 
-            var myStateMachine = new TraficLightStateMachine(valueFromDatabase);
+            var myStateMachine = new TrafficLightStateMachine();
+            myStateMachine.SetInitialState(valueFromDatabase);
 
             Console.WriteLine($"Current state: {myStateMachine.CurrentState}"); // Red
 

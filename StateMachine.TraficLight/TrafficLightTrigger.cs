@@ -2,6 +2,5 @@
 {
     TimerElapsed,
     EmergencyStop,
-    TestTrigger,
-    AnotherTimerElapsed
+    TestTrigger
 }
