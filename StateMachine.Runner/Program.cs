@@ -6,10 +6,10 @@ namespace StateMachine.Runner
     {
         static void Main(string[] args)
         {
-            var valueFromDatabase = TrafficLightState.Red;
+            var initialValue = TrafficLightState.Red;
 
             var myStateMachine = new TrafficLightStateMachine();
-            myStateMachine.SetInitialState(valueFromDatabase);
+            myStateMachine.SetInitialState(initialValue);
 
             Console.WriteLine($"Current state: {myStateMachine.CurrentState}"); // Red
 
@@ -23,7 +23,7 @@ namespace StateMachine.Runner
             Console.WriteLine($"Current state: {myStateMachine.CurrentState}"); // Red
 
             //Not Allowed transition
-            valueFromDatabase = myStateMachine.Fire(TrafficLightTrigger.TestTrigger);
+            initialValue = myStateMachine.Fire(TrafficLightTrigger.TestTrigger);
         }
     }
 }
