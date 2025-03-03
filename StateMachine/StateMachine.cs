@@ -1,16 +1,42 @@
 ﻿using StateMachine;
 
+/// <summary>
+/// Represents a generic state machine that manages state transitions based on triggers.
+/// </summary>
+/// <typeparam name="TState">The type representing the states in the state machine.</typeparam>
+/// <typeparam name="TTrigger">The type representing the triggers that cause state transitions.</typeparam>
+/// <remarks>
+/// This class implements a simple state machine where transitions between states are triggered by specific events.
+/// Each state can have multiple transitions defined, each associated with a unique trigger.
+/// The state machine must be initialized with an initial state before any operations can be performed.
+/// </remarks>
+/// <example>
+/// <code>
+/// var stateMachine = new StateMachine<string, int>();
+/// stateMachine.SetInitialState("Start");
+/// stateMachine.AddTransition("Start", 1, "End");
+/// stateMachine.Fire(1); // Transitions from "Start" to "End"
+/// </code>
+/// </example>
 public class StateMachine<TState, TTrigger> : IStateMachine<TState, TTrigger>
+    where TState : notnull
+    where TTrigger : notnull
 {
     private readonly Dictionary<TState, Dictionary<TTrigger, TState>> _transitions;
     private TState _currentState;
     private bool isInitialStateSeated = false;
 
+    // Creates an empty state machine with no defined transitions.
+    /// The state machine uses a nested dictionary to store state transitions,
+    /// where the outer dictionary maps states to their possible triggers,
+    /// and the inner dictionary maps triggers to resulting states.
     public StateMachine()
     {
         _transitions = new Dictionary<TState, Dictionary<TTrigger, TState>>();
     }
 
+    /// Gets the current state of the state machine.
+    /// <value>The current state of type <typeparamref name="TState"/>.</value>    public TState CurrentState => _currentState;
     public TState CurrentState => _currentState;
 
     public void SetInitialState(TState initialState)
